@@ -6,14 +6,14 @@
 /*   By: mbellini <mbellini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:17:50 by mbellini          #+#    #+#             */
-/*   Updated: 2022/04/26 17:07:32 by mbellini         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:54:02 by mbellini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line/get_next_line.h"
-#include "ft_printf/ft_printf.h"
-#include <unistd.h>
+#include "map.h"
 //#include <stdio.h>
+
+//Compte le nombre de lignes dans le tableau
 
 static int	file_linecount(char *file)
 {
@@ -40,6 +40,8 @@ static int	file_linecount(char *file)
 	return (linecount);
 }
 
+//Alloue un emplacement par ligne
+
 static char	**init_alloc(char *file)
 {
 	char	**map;
@@ -59,6 +61,8 @@ static char	**init_alloc(char *file)
 	}
 	return (map);
 }
+
+//Alloue les caracteres de chaque ligne 1 par 1 avec l'aide de gnl
 
 char	**read_map(char *file)
 {
@@ -82,25 +86,3 @@ char	**read_map(char *file)
 	close(fd);
 	return (map);
 }
-
-
-/*
-int	main()
-{
-	int	i = 0;
-	int j;
-	char **map;
-
-	map = read_map("map1.ber");
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			printf("%c", map[i][j]);
-			j++;
-		}
-		i++;
-	}
-}
-*/
