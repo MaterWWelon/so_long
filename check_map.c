@@ -128,6 +128,8 @@ int	check_map(char **map)
 	}
 	if (check_contenu(map) == 0)
 		return(0);
+	if (check_pathing(map) == 0)
+		return(0);
 	return(1);
 }
 

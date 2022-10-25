@@ -1,6 +1,6 @@
 NAME = so_long
 
-SRCS =	read_map.c check_map.c so_long.c window_size.c create_map.c $(GNL)
+SRCS =	read_map.c check_map.c so_long.c window_size.c create_map.c moves.c check_pathing.c $(GNL)
 
 GNL = get_next_line.c get_next_line_utils.c
 
