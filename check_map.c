@@ -131,6 +131,7 @@ int	check_map(char **map)
 	return(1);
 }
 
+/*
 int	main()
 {
 	int	i = 0;
@@ -151,3 +152,5 @@ int	main()
 	printf("\n");
 	printf("check map: %d\n", check_contenu(map));
 }
+
+*/
