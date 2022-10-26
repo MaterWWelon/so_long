@@ -31,13 +31,14 @@ int key_hook(int keycode, t_vars *vars, char **map)
 int	main(void)
 {
 	t_vars	vars;
+	t_coord	coord;
 //	void	*img;
 //	int		img_width;
 //	int		img_height;
 	char	**map;
 
 	map = read_map("map1.ber");
-	if (check_map(map) == 1)
+	if (check_map(map, &coord) == 1)
 	{
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, window_length(map), window_height(map), "so_long");

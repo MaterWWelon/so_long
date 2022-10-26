@@ -109,7 +109,7 @@ int	check_contenu(char **map)
 	return(1);
 }
 
-int	check_map(char **map)
+int	check_map(char **map, t_coord *coord)
 {
 	if (!map)
 	{
@@ -128,8 +128,11 @@ int	check_map(char **map)
 	}
 	if (check_contenu(map) == 0)
 		return(0);
-	if (check_pathing(map) == 0)
+	if (check_pathing(map, coord) == 0)
+	{
+		ft_printf("%s\n", "Error\n-->Pathing non viable");
 		return(0);
+	}
 	return(1);
 }
 

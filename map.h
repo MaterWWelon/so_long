@@ -13,13 +13,20 @@ typedef struct s_vars {
 	void	*win;
 }				t_vars;
 
+typedef struct s_coord {
+	int 	x;
+	int 	y;
+}				t_coord;
+
+
 char	**read_map(char *file);
 int		line_count(char **map);
 int		column_count(char **map);
 int		window_height(char **map);
 int		window_length(char **map);
-int		check_pathing(char **map);
-int		check_map(char **map);
+void	pathing(char **map, t_coord *coord);
+int		check_pathing(char **map, t_coord *coord);
+int		check_map(char **map, t_coord *coord);
 void	create_map(char **map, t_vars vars);
 
 void	move_up(char **map);

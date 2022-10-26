@@ -1,13 +1,6 @@
 #include "map.h"
 #include <stdio.h>
-
-typedef struct s_coord
-{
-	int	x;
-	int	y;
-}				t_coord;
-
-
+/*
 int	count_collectible(char **map)
 {
 	int	i;
@@ -29,6 +22,7 @@ int	count_collectible(char **map)
 	}
 	return (c);
 }
+*/
 
 void	initialisation(char **map, t_coord *coord)
 {
@@ -44,17 +38,56 @@ void	initialisation(char **map, t_coord *coord)
 	}
 }
 
-int	check_pathing(char **map)
+void	pathing(char **map, t_coord *coord)
 {
-	int	i;
-	int	j;
-	//int	c;
-	int	c_total;
+	printf("map[x][y]:%c\n", map[coord->x][coord->y]);
+	if (map[coord->x][coord->y] == '1' || map[coord->x][coord->y] == '\n')
+		return;
+	if (map[coord->x][coord->y] != '1')
+	{
+		map[coord->x][coord->y] = '1';
+		coord->x--;
+		pathing(map, coord);
+		coord->x += 2;
+		pathing(map, coord);
+		coord->x--;
+		coord->y--;
+		pathing(map, coord);
+		coord->y += 2;
+		pathing(map, coord);
+	}
+}
 
-	c_total = count_collectible(map);
-	printf("c_total: %d\n", c_total);
+int check_pathing(char **map, t_coord *coord)
+{
+	int i;
+	int j;
 
+	initialisation(map, coord);
+	printf("ini\nx:%d\ny:%d\n", coord->x, coord->y);
+	pathing(map, coord);
 
+	i = 0;
+	while (map && map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			printf("%c", map[i][j]);
+		}
+	}
 
-	return (0);
+	i = 0;
+	while (map && map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '0')
+				return(0);
+			j++;
+		}
+		i++;
+	}
+	return(1);
 }
