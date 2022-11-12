@@ -68,20 +68,20 @@ int check_pathing(char **map, t_coord *coord)
 	pathing(map, coord);
 
 	i = 0;
-	while (map && map[i])
+	while (map && map[i] && i < line_count(map))
 	{
 		j = 0;
-		while (map[i][j])
+		while (map[i][j] && j < column_count(map))
 		{
 			printf("%c", map[i][j]);
 		}
 	}
 
 	i = 0;
-	while (map && map[i])
+	while (map && map[i] && i < line_count(map))
 	{
 		j = 0;
-		while (map[i][j])
+		while (map[i][j] && j < column_count(map))
 		{
 			if (map[i][j] == '0')
 				return(0);
