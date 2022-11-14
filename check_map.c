@@ -1,26 +1,20 @@
 #include "map.h"
 
-int	line_count(char **map)
+void	line_count(char **map, t_size *size)
 {
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return(i);
+	size->line = 0;
+	while (map[size->line])
+		++size->line;
 }
 
-int	column_count(char **map)
+void	column_count(char **map, t_size *size)
 {
-	int j;
-
-	j = 0;
-	while (map[0][j] != '\n')
-		j++;
-	return(j);
+	size->column = 0;
+	while (map[0][size->column] != '\n')
+		++size->column;
 }
 
-int	check_dim_map(char **map)
+int	check_dim_map(char **map, t_size *size)
 {
 	int	i;
 	int	j;
@@ -31,32 +25,28 @@ int	check_dim_map(char **map)
 		j = 0;
 		while (map[i][j] && map[i][j] != '\n')
 			j++;
-		if (j != column_count(map))
+		if (j != size->column)
 			return(0);
 		i++;
 	}
 	return(1);
 }
 
-int	check_murs(char **map)
+int	check_murs(char **map, t_size *size)
 {
-	int	linecount;
-	int	columncount;
 	int	i;
 	int	j;
 
-	linecount = line_count(map);
-	columncount = column_count(map);
 	j = 0;
-	while (map[0][j] == '1' && map[linecount - 1][j] == '1')
+	while (map[0][j] == '1' && map[size->line - 1][j] == '1')
 		j++;
-	if (j != columncount)
+	if (j != size->column)
 		return(0);
 	
 	i = 0;
-	while (i < linecount && map[i][0] == '1' && map[i][columncount - 1] == '1')
+	while (i < size->line && map[i][0] == '1' && map[i][size->column - 1] == '1')
 		i++;
-	if (i != linecount)
+	if (i != size->line)
 		return(0);
 	return(1);	
 }
@@ -109,26 +99,26 @@ int	check_contenu(char **map)
 	return(1);
 }
 
-int	check_map(char **map, t_coord *coord)
+int	check_map(char **map, t_coord *coord, t_size *size)
 {
 	if (!map)
 	{
 		ft_printf("%s\n", "Error\n-->Aucune map presente");
 		return(0);
 	}	
-	if (check_dim_map(map) == 0)
+	if (check_dim_map(map, size) == 0)
 	{
 		ft_printf("%s\n", "Error\n-->Mauvaises dimentions de map");
 		return(0);
 	}
-	if (check_murs(map) == 0)
+	if (check_murs(map, size) == 0)
 	{
 		ft_printf("%s\n", "Error\n-->Murs non conformes");
 		return(0);
 	}
 	if (check_contenu(map) == 0)
 		return(0);
-	if (check_pathing(map, coord) == 0)
+	if (check_pathing(map, coord, size) == 0)
 	{
 		ft_printf("%s\n", "Error\n-->Pathing non viable");
 		return(0);

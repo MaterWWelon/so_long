@@ -32,16 +32,19 @@ int	main(void)
 {
 	t_vars	vars;
 	t_coord	coord;
+	t_size	size;
 //	void	*img;
 //	int		img_width;
 //	int		img_height;
 	char	**map;
 
 	map = read_map("map1.ber");
-	if (check_map(map, &coord) == 1)
+	line_count(map, &size);
+	column_count(map, &size);
+	if (check_map(map, &coord, &size) == 1)
 	{
 		vars.mlx = mlx_init();
-		vars.win = mlx_new_window(vars.mlx, window_length(map), window_height(map), "so_long");
+		vars.win = mlx_new_window(vars.mlx, window_length(&size), window_height(&size), "so_long");
 		create_map(map, vars);
 //		img = mlx_xpm_file_to_image(vars.mlx, "./img/tree.xpm", &img_width, &img_height);
 //		mlx_put_image_to_window(vars.mlx, vars.win, img, 0, 0);

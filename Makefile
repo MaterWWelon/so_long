@@ -5,7 +5,7 @@ SRCS =	read_map.c check_map.c so_long.c window_size.c create_map.c moves.c check
 GNL = get_next_line.c get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 
 all: $(NAME)
 
