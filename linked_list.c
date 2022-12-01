@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   linked_list.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbellini <mbellini@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/01 13:05:29 by mbellini          #+#    #+#             */
+/*   Updated: 2022/12/01 15:30:45 by mbellini         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "map.h"
 
 int	count_collectible(t_vars *vars)
 {
 	int	i;
 	int	j;
-	int	c;
 
-	c = 0;
+	vars->coord->total_collectible = 0;
 	i = 0;
 	while (vars->map && vars->map[i])
 	{
@@ -14,30 +25,30 @@ int	count_collectible(t_vars *vars)
 		while (vars->map[i][j])
 		{
 			if (vars->map[i][j] == 'C')
-				c++;
+				vars->coord->total_collectible++;
 			j++;
 		}
 		i++;
 	}
-	return (c);
+	return (vars->coord->total_collectible);
 }
 
-
-void	include_list(t_vars *vars)
+void	include_list(int x, int y, t_vars *vars)
 {
-	t_list *list;
+	t_list	*list;
+	t_list	*curr;
+
 	list = malloc(sizeof(list));
 	if (list == NULL)
-		return;	
+		return ;
 	list->next = NULL;
-	list->x = vars->coord->x;
-	list->y = vars->coord->y;
+	list->x = x;
+	list->y = y;
 	if (vars->list == NULL)
 	{
 		vars->list = list;
-		return;
+		return ;
 	}
-	t_list* curr;
 	curr = vars->list;
 	while (curr->next != NULL)
 		curr = curr->next;
@@ -46,11 +57,12 @@ void	include_list(t_vars *vars)
 
 void	free_list(t_vars *vars)
 {
-	t_list* curr;
+	t_list	*curr;
+	t_list	*temp;
+
 	curr = vars->list;
 	while (curr != NULL)
 	{
-		t_list* temp;
 		temp = curr;
 		curr = curr->next;
 		free(temp);

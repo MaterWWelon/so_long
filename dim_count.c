@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_size.c                                      :+:      :+:    :+:   */
+/*   dim_count.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbellini <mbellini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 12:17:50 by mbellini          #+#    #+#             */
-/*   Updated: 2022/12/01 15:31:10 by mbellini         ###   ########.fr       */
+/*   Created: 2022/12/01 13:31:43 by mbellini          #+#    #+#             */
+/*   Updated: 2022/12/01 13:32:15 by mbellini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-int	window_height(t_size *size)
+void	line_count(t_vars *vars, t_size *size)
 {
-	int	w_height;
-
-	w_height = size->line * 40;
-	return (w_height);
+	size->line = 0;
+	while (vars->map[size->line])
+		++size->line;
 }
 
-int	window_length(t_size *size)
+void	column_count(t_vars *vars, t_size *size)
 {
-	int	w_length;
-
-	w_length = size->column * 40;
-	return (w_length);
+	size->column = 0;
+	while (vars->map[0][size->column] != '\n')
+		++size->column;
 }

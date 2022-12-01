@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "map.h"
-//#include <stdio.h>
 
 //Compte le nombre de lignes dans le tableau
 
